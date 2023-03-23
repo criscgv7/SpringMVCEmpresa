@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 @Table (name="telefonos")
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 
 public class Telefono implements Serializable {
     
@@ -34,7 +34,7 @@ private int idEmpleado;
 
 
 @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-private final Empleado empleado; 
+private Empleado empleado; 
 
 
 }

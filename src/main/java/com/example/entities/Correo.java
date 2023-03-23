@@ -24,7 +24,6 @@ import lombok.NoArgsConstructor;
 
 
 
-
 public class Correo implements Serializable{
 
     private static final long serialVersionUID=1L;
@@ -36,6 +35,6 @@ public class Correo implements Serializable{
 
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    private final Empleado empleado; 
+    private Empleado empleado; 
 
 }
