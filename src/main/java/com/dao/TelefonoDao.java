@@ -1,8 +1,8 @@
-package com.example.dao;
+package com.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.entities.Telefono;
+import com.entities.Telefono;
 
 public interface TelefonoDao extends JpaRepository <Telefono, Integer> {
     

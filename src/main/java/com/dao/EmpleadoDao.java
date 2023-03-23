@@ -1,8 +1,8 @@
-package com.example.dao;
+package com.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.entities.Empleado;
+import com.entities.Empleado;
 
 public interface EmpleadoDao  extends JpaRepository <Empleado, Integer>{
     

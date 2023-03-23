@@ -1,4 +1,4 @@
-package com.example.entities;
+package com.entities;
 
 import java.io.Serializable;
 
@@ -15,26 +15,26 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
-@Table (name="telefonos")
+@Table (name = "correos")
 @Data
-@Builder
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
 
-public class Telefono implements Serializable {
-    
-private static final long serialVersionUID=1L;
-@Id
-@GeneratedValue (strategy = GenerationType.IDENTITY)
-private int id; 
-private String numero; 
-private int idEmpleado; 
 
 
-@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-private Empleado empleado; 
+public class Correo implements Serializable{
 
+    private static final long serialVersionUID=1L;
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private int id;
+    private  String email; 
+    private int idEmpleado; 
+
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    private Empleado empleado; 
 
 }
