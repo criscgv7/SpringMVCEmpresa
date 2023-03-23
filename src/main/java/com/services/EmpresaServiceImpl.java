@@ -1,13 +1,15 @@
-package com.example.services;
+package com.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.EmpresaDao;
 import com.entities.Empresa;
 
+@Service
 public class EmpresaServiceImpl implements EmpresaService {
     @Autowired
     private EmpresaDao empresaDao;

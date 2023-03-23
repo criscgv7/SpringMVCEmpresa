@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
-import com.example.entities.Empleado;
-import com.example.entities.Empresa;
-import com.example.entities.Telefono;
-import com.example.services.EmpleadoService;
-import com.example.services.EmpresaService;
-import com.example.services.TelefonoService;
+import com.entities.Empleado;
+import com.entities.Empresa;
+import com.entities.Telefono;
+import com.services.EmpleadoService;
+import com.services.EmpresaService;
+import com.services.TelefonoService;
 import com.services.CorreoService;
 
 @Controller
@@ -53,17 +53,17 @@ public class MainController {
 /**
  * 2. DAR DE ALTA UN EMPLEADO - FORMULARIO
  */
-
+/** 
 
  //FORMULARIO
  @GetMapping("/formulario")
  public String formularioAltaEmpleado(Model model) {
 
-     List<Empresa> empresas = EmpresaService.findAll();
+     List<Empresa> empresas = empresaService.findAll();
      Empleado empleado = new Empleado();
 
-     model.addAttribute("empleado", empleado)
-     model.addAttribute("empresas", empresas)
+     model.addAttribute("empleado", empleado);
+     model.addAttribute("empresas", empresas); 
 
      return "views/formularioAltaEmpleado";
 
@@ -100,5 +100,5 @@ public class MainController {
      return "redirect:/listado";
  }
 
-
+**/
 }
