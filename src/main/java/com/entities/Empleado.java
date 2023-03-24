@@ -51,7 +51,7 @@ public class Empleado implements Serializable {
     //Relacion entre tablas 
     @ManyToOne (fetch = FetchType.LAZY, cascade =  CascadeType.PERSIST)
 
-    private Empresa empresa; 
+    private Departamento departamento; 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "empleado")
     private List <Telefono> telefonos; 
 

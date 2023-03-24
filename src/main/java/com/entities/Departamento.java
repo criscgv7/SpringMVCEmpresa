@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-public class Empresa implements Serializable {
+public class Departamento implements Serializable {
 
     private static final long serialVersionUID=1L;
     @Id

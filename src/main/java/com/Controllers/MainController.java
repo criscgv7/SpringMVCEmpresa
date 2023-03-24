@@ -15,10 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
 import com.entities.Empleado;
-import com.entities.Empresa;
+import com.entities.Departamento;
 import com.entities.Telefono;
 import com.services.EmpleadoService;
-import com.services.EmpresaService;
+import com.services.DepartamentoService;
 import com.services.TelefonoService;
 import com.services.CorreoService;
 
@@ -29,7 +29,7 @@ public class MainController {
 
     private static final Logger LOG = Logger.getLogger("MainController");
     @Autowired
-    private EmpresaService empresaService;
+    private DepartamentoService departamentoService;
     @Autowired
     private EmpleadoService empleadoService;
     @Autowired
@@ -59,11 +59,11 @@ public class MainController {
  @GetMapping("/formulario")
  public String formularioAltaEmpleado(Model model) {
 
-     List<Empresa> empresas = empresaService.findAll();
+     List<Departamento> departamentos = departamentoService.findAll();
      Empleado empleado = new Empleado();
 
      model.addAttribute("empleado", empleado);
-     model.addAttribute("empresas", empresas); 
+     model.addAttribute("departamentos", departamentos); 
 
      return "views/formularioAltaEmpleado";
 
