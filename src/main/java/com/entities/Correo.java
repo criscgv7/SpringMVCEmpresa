@@ -31,7 +31,7 @@ public class Correo implements Serializable{
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private  String email; 
-    private int idEmpleado; 
+   
 
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.entities.Correo;
 import com.entities.Departamento;
 import com.entities.Empleado;
 import com.entities.Telefono;
@@ -69,39 +70,48 @@ public class MainController {
     }
 
     // ALTA
- @PostMapping("/altaModificacionEmpleado")
- public String altaModificacionEmpleado(@ModelAttribute Empleado empleado,
-         @RequestParam(name = "numerosTelefonos") String telefonosRecibidos) {
-     LOG.info("Telefonos recibidos:" + telefonosRecibidos);
+    @PostMapping("/altaModificacionEmpleado")
 
-     empleadoService.save(empleado);
+    public String altaModificacionEmpleado(@ModelAttribute Empleado empleado,
+            @RequestParam(name = "numerosTelefonos") String telefonosRecibidos,
+            @RequestParam(name = "correosEmail") String correosRecibidos) {
 
-   
-     empleadoService.save(empleado);
-     List<String> listadoNumerosTelefonos = null;
-
-     if (telefonosRecibidos != null) {
-         String[] arrayTelefonos = telefonosRecibidos.split(";");
-         listadoNumerosTelefonos = Arrays.asList(arrayTelefonos); 
-     }
-   
-     return "redirect:/listado"; }
-
-    public String altaModificacionEmpleado2(@ModelAttribute Empleado empleado,
-            @RequestParam(name = "Correos") String correosRecibidos) {
-        LOG.info("Correos recibidos:" + correosRecibidos);
+        LOG.info("Telefonos Recibidos:" + telefonosRecibidos);
+        LOG.info("Correos Recibidos:" + correosRecibidos);
 
         empleadoService.save(empleado);
-
         empleadoService.save(empleado);
+
+        List<String> listadoTelefonos = null;
         List<String> listadoCorreos = null;
 
-        if (correosRecibidos != null) {
-            String[] arrayCorreos = correosRecibidos.split(";");
-            listadoCorreos = Arrays.asList(arrayCorreos);
+        if (telefonosRecibidos != null) {
+            String[] arrayTel = telefonosRecibidos.split(";");
+            listadoTelefonos = Arrays.asList(arrayTel);
         }
 
-   
-        return "redirect:/listado"; }
+        if (listadoTelefonos != null) {
 
+            listadoTelefonos.stream().forEach(n -> {
+                Telefono telefonoObject = Telefono.builder().numero(n).empleado(empleado).build();
+
+                telefonoService.save(telefonoObject);
+            });
+        }
+
+        if (correosRecibidos != null) {
+            String[] arrayCo = correosRecibidos.split(";");
+            listadoCorreos = Arrays.asList(arrayCo);
+        }
+        if (listadoCorreos != null) {
+            listadoCorreos.stream().forEach(n -> {
+                Correo correoObject = Correo.builder().email(n).empleado(empleado).build();
+
+                correoService.save(correoObject);
+            });
+        }
+
+        return "redirect:/listado";
+
+    }
 }

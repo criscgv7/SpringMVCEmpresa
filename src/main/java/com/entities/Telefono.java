@@ -30,7 +30,6 @@ private static final long serialVersionUID=1L;
 @GeneratedValue (strategy = GenerationType.IDENTITY)
 private int id; 
 private String numero; 
-private int idEmpleado; 
 
 
 @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
