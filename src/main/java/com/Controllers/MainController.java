@@ -1,15 +1,22 @@
 package com.Controllers;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.entities.Departamento;
 import com.entities.Empleado;
+import com.entities.Telefono;
 import com.services.CorreoService;
 import com.services.DepartamentoService;
 import com.services.EmpleadoService;
@@ -43,26 +50,25 @@ public class MainController {
         return mav;
     }
 
-/**
- * 2. DAR DE ALTA UN EMPLEADO - FORMULARIO
- */
-/** 
+    /**
+     * 2. DAR DE ALTA UN EMPLEADO - FORMULARIO
+     */
 
- //FORMULARIO
- @GetMapping("/formulario")
- public String formularioAltaEmpleado(Model model) {
+    // FORMULARIO
+    @GetMapping("/formulario")
+    public String formularioAltaEmpleado(Model model) {
 
-     List<Departamento> departamentos = departamentoService.findAll();
-     Empleado empleado = new Empleado();
+        List<Departamento> departamentos = departamentoService.findAll();
+        Empleado empleado = new Empleado();
 
-     model.addAttribute("empleado", empleado);
-     model.addAttribute("departamentos", departamentos); 
+        model.addAttribute("empleado", empleado);
+        model.addAttribute("departamentos", departamentos);
 
-     return "views/formularioAltaEmpleado";
+        return "views/formularioAltaEmpleado";
 
- }
+    }
 
- //ALTA
+    // ALTA
  @PostMapping("/altaModificacionEmpleado")
  public String altaModificacionEmpleado(@ModelAttribute Empleado empleado,
          @RequestParam(name = "numerosTelefonos") String telefonosRecibidos) {
@@ -76,22 +82,26 @@ public class MainController {
 
      if (telefonosRecibidos != null) {
          String[] arrayTelefonos = telefonosRecibidos.split(";");
-         listadoNumerosTelefonos = Arrays.asList(arrayTelefonos);
+         listadoNumerosTelefonos = Arrays.asList(arrayTelefonos); 
      }
+   
+     return "redirect:/listado"; }
 
-     // Borrar todos los telefonos que tenga el empleado si hay que insertar nuevos
+    public String altaModificacionEmpleado2(@ModelAttribute Empleado empleado,
+            @RequestParam(name = "Correos") String correosRecibidos) {
+        LOG.info("Correos recibidos:" + correosRecibidos);
 
-     if (listadoNumerosTelefonos != null) {
-         listadoNumerosTelefonos.stream().forEach(n -> {
-             Telefono telefonoObject = Telefono.builder().numero(n).empleado(empleado).build();
+        empleadoService.save(empleado);
 
-             telefonoService.save(telefonoObject);
+        empleadoService.save(empleado);
+        List<String> listadoCorreos = null;
 
-         });
-     }
+        if (correosRecibidos != null) {
+            String[] arrayCorreos = correosRecibidos.split(";");
+            listadoCorreos = Arrays.asList(arrayCorreos);
+        }
 
-     return "redirect:/listado";
- }
+   
+        return "redirect:/listado"; }
 
-**/
 }
