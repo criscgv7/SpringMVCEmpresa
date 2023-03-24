@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dao.CorreoDao;
 import com.entities.Correo;
+import com.entities.Empleado;
 
 import jakarta.transaction.Transactional;
 
@@ -36,5 +37,19 @@ public class CorreoServiceImpl implements CorreoService {
     public void deleteById(int idCorreo) {
         correoDao.deleteById(idCorreo);
     }
+
+    @Override
+@Transactional
+public void deleteByEmpleado(Empleado empleado) {
+    correoDao.deleteByEmpleado(empleado); 
+}
+
+@Override
+
+public List <Correo> findByEmpleado(Empleado empleado) {
+ return correoDao.findByEmpleado(empleado); 
+
+}   
+
 
 }

@@ -36,7 +36,7 @@ public void save(Telefono telefono) {
 public void deleteById(int idTelefono) {
     telefonoDao.deleteById(idTelefono);
 }
-/* 
+
 @Override
 @Transactional
 public void deleteByEmpleado(Empleado empleado) {
@@ -46,9 +46,9 @@ public void deleteByEmpleado(Empleado empleado) {
 @Override
 
 public List <Telefono> findByEmpleado(Empleado empleado) {
- return telefonoDao.findByEmpleado (empleado);
+ return telefonoDao.findByEmpleado(empleado); 
 
-}   */
+}   
 
     
 }

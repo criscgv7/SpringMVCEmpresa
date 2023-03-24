@@ -33,9 +33,13 @@
                 <td th:text="${empleado.genero}"></td>
                 <td th:text="${empleado.departamento.nombre}"></td>
 
-          
-            </tr>
 
+
+                <td><a th:href="@{/formularioActualizar/}+${empleado.id}">Actualizar</a>
+                    <a th:href="@{/borrar/}+${empleado.id}">Borrar</a>
+                    <a th:href="@{/detalles/}+${empleado.id}">Ver detalles</a>
+                </td>
+            </tr>
         </tbody>
 
 
