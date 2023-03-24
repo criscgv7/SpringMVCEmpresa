@@ -11,10 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.entities.Departamento;
 import com.entities.Empleado;
 import com.entities.Empleado.Genero;
-import com.services.CorreoService;
 import com.services.DepartamentoService;
 import com.services.EmpleadoService;
-import com.services.TelefonoService;
 
 @SpringBootApplication
 public class SpringMvcEmpresaApplication implements CommandLineRunner {
@@ -23,10 +21,7 @@ public class SpringMvcEmpresaApplication implements CommandLineRunner {
 	private DepartamentoService departamentoService;
 	@Autowired
 	private EmpleadoService empleadoService;
-	@Autowired
-	private TelefonoService telefonoService;
-	@Autowired
-	private CorreoService correoService;
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringMvcEmpresaApplication.class, args);
@@ -52,13 +47,13 @@ public class SpringMvcEmpresaApplication implements CommandLineRunner {
 		.genero(Genero.MUJER)
 		.departamento(departamentoService.findById(1)).build());
 
-		empleadoService.save(Empleado.builder().id(1).nombre("Irene")
+		empleadoService.save(Empleado.builder().id(2).nombre("Irene")
 		.apellidos("Galindo Velasco")
 		.fechaAlta(LocalDate.of(1983, Month.AUGUST, 21))
 		.genero(Genero.MUJER)
 		.departamento(departamentoService.findById(2)).build());
 
-		empleadoService.save(Empleado.builder().id(1).nombre("Belén")
+		empleadoService.save(Empleado.builder().id(3).nombre("Belén")
 		.apellidos("Martinez Perez")
 		.fechaAlta(LocalDate.of(1996, Month.DECEMBER, 23))
 		.genero(Genero.MUJER)
