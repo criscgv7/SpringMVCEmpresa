@@ -121,7 +121,7 @@ public class MainController {
      * 3.ACTUALIZAR UN EMPLEADO
      */
 
-    /** FOrmulario para actualizar un estudiante */
+    /** Formulario para actualizar un estudiante */
     @GetMapping("/formularioActualizar/{id}")
     public String formularioActualizarEstudiante(@PathVariable(name = "id") int idEmpleado, Model model) {
         Empleado empleado = empleadoService.findById(idEmpleado);
@@ -154,6 +154,32 @@ public class MainController {
         empleadoService.delete(empleadoService.findById(idEmpleado));
 
         return "redirect:/listado";
+    }
+
+
+    /**
+     * 4. DETALLES DEL EMPLEADO
+     */
+
+     @GetMapping("/detalles/{id}")
+    public ModelAndView detalles(@PathVariable(name = "id") int id) {
+
+        Empleado empleado = empleadoService.findById(id);
+        List<Telefono> telefonosEmpleado = telefonoService.findByEmpleado(empleado);
+        List<String> numerosEmpleado = telefonosEmpleado.stream()
+                .map(t -> t.getNumero())
+                .toList();
+        List<Correo> correosEmpleado = correoService.findByEmpleado(empleado);
+        List<String> emailsEmpleado = correosEmpleado.stream()
+                        .map(t -> t.getEmail())
+                        .toList();
+        ModelAndView mav = new ModelAndView("views/detailsEmpleado");
+
+        mav.addObject("telefonos", numerosEmpleado);
+        mav.addObject("empleado", empleado);
+        mav.addObject("correos", emailsEmpleado); 
+
+        return mav;
     }
 
 }
